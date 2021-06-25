@@ -1,0 +1,20 @@
+.btnInc {
+	padding: 10px;
+	position: relative;
+	top: 71px;
+	background-color: #1891af;
+	border-radius: 10px;
+	color: white;
+	margin-right: 10px;
+}
+.btnDrop {
+	padding: 10px;
+	position: relative;
+	top: 71px;
+	background-color: #1891af;
+	border-radius: 10px;
+	color: white;
+}
+.btnErr {
+	background-color: darkred;
+}

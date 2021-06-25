@@ -1,0 +1,10 @@
+.Counter {
+	border: 2px solid rgba(210, 28, 192, 0.58);
+	background-color: rgba(50, 87, 252, 0.49);
+	border-radius: 20px;
+	position: absolute;
+	width: 20%;
+	height: 35%;
+	top: 10%;
+	left: 5%;
+}

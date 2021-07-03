@@ -1,22 +1,21 @@
 import React, { ChangeEvent, ChangeEventHandler } from 'react';
+import { SetTextType } from '../../App';
 import s from './CounterSetting.module.css'
 import { InputSetting } from './InputS/InputSetting';
 
 
 type CounterType = {
     counterStart:number
-    counterMin:number
-    onChagneValueInputStart:(e:ChangeEvent<HTMLInputElement>) => void
-    onChagneValueInputMax:(e:ChangeEvent<HTMLInputElement>) => void
+    counterMax:number
+    setCounterStart:(max:number) => void
+    setCounterMax:(start:number ) => void
 }
 export const CounterSetting = (props:CounterType) => {
     return (
         <div className={s.Counter}>
-            <InputSetting onChagneValueInputMax={props.onChagneValueInputMax}
-                          onChagneValueInputStart={props.onChagneValueInputStart}
-                          counterStart={props.counterStart}
-                          counterMin={props.counterMin}/>
-
+            <InputSetting  setCounterStart={props.setCounterStart} setCounterMax={props.setCounterMax}
+                counterStart={props.counterStart}
+                          counterMax={props.counterMax}/>
         </div>
     );
 };

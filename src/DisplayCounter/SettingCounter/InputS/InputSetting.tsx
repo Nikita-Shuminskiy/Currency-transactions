@@ -3,23 +3,34 @@ import { ButtonCounter } from '../../Button/ButtonCounter';
 import s from './Input.module.css'
 
 type InputSetType = {
-    counterMin:number
+    counterMax:number
     counterStart:number
-    onChagneValueInputStart:(e:ChangeEvent<HTMLInputElement>) => void
-    onChagneValueInputMax:(e:ChangeEvent<HTMLInputElement>) => void
+    setCounterMax: (max:number) => void
+    setCounterStart: (start:number) => void
 }
 export const InputSetting = (props:InputSetType) => {
-  /*  let start = 0
-    let max = 50
-    const [startValue, setStartValue] = useState(start)*/
+    const start = 0
+    const max = 0
+
+    const [startValue, setStartValue] = useState(start)
+    const [maxValue, setMaxValue] = useState(max)
+
     const reset = () => {
-        alert(props.counterStart)
+        props.setCounterMax(maxValue - 1)
+        props.setCounterStart(startValue - 1)
     }
+    const btnInc = s.btnInc
+    const onChagneValueInputStart = (e: ChangeEvent<HTMLInputElement>) => {
+        setStartValue(+e.currentTarget.value + 1)
+    }
+    const onChagneValueInputMax = (e: ChangeEvent<HTMLInputElement>) => setMaxValue(+e.currentTarget.value + 1)
     return (
         <div className={s.inputBlock}>
-          <span>START VALUE:</span> <input className={s.input} onChange={props.onChagneValueInputStart} type="number"    max={props.counterStart} />
-           <span>MAX VALUE:</span> <input className={s.input} type="number" onChange={props.onChagneValueInputMax}  max={props.counterStart} />
-          <ButtonCounter nameBtn={'reset'}  click={reset} />
+         <div className={s.inputLeadBlock}>
+             <div>MAX VALUE: <input className={s.input} type={'number'} onChange={onChagneValueInputMax}  max={maxValue} /></div>
+             <div>START VALUE: <input className={s.input} onChange={onChagneValueInputStart} type={'number'}   max={startValue} /></div>
+         </div>
+          <ButtonCounter btn={btnInc}  nameBtn={'reset'}  click={reset} />
         </div>
     );
 };

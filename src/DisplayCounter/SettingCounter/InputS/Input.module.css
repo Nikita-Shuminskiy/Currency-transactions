@@ -1,8 +1,26 @@
 .inputBlock{
-	display: flex;
-	flex-direction: column-reverse;
-	align-items: center;
 }
 .input{
-	padding: 10%;
+	margin-left: 40px;
+	margin-top: 10%;
+	width: 41%;
+	height: 20px;
+	border-radius: 5px;
+}
+.inputBlock{
+	display: flex;
+	flex-direction: column;
+	text-align: center
+}
+.btnInc{
+	padding: 10px;
+	background-color: yellowgreen;
+	border-radius: 10px;
+	color: white;
+}
+.inputLeadBlock{
+	padding: 10px;
+	margin: 30px;
+	border: 1px solid yellowgreen;
+	border-radius: 10px;
 }

@@ -8,13 +8,18 @@ type CounterType = {
     dropping: () => void
     counterMax:number
     counterStart:number
+    error:string | null
 }
 
 export const Counter: React.FC<CounterType> = (props) => {
     const count = props.counterMax === props.counterStart ? 'counterDisplay' : 'counter'
+
     const btnInc = props.counterMax === props.counterStart ? 'btnIncErr': 'btnInc'
+
     const btnDrop = props.counterMax === props.counterStart ? 'btnErrDrop': 'btnDrop'
+
     const disDrop = props.counterMax === props.counterStart ? false : true
+
     const disInc = props.counterMax === props.counterStart ? true : false
 
     return (
@@ -22,7 +27,7 @@ export const Counter: React.FC<CounterType> = (props) => {
             <div className={'block'}>
                 <p> Counter Exam Monday</p>
                 <div className={count}>
-                    {props.counterStart}
+                    {props.error ? <div className="error-message">{props.error}</div> :  props.counterStart}
                 </div>
                 <ButtonCounter nameBtn={'Drop'} click={props.dropping} btn={btnDrop} dis={disDrop}/>
                 <ButtonCounter nameBtn={'Inc'} btn={btnInc} dis={disInc} click={props.handleClick} />

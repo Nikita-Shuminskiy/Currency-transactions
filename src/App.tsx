@@ -3,9 +3,8 @@ import './App.css';
 import { Counter } from './DisplayCounter/Counter';
 import { CounterSetting } from './DisplayCounter/SettingCounter/CounterSetting';
 
-export type SetTextType = {
+export type AppType = {
     text:string
-    error:string
 }
 
 const App = () => {
@@ -13,25 +12,18 @@ const App = () => {
     let startCount = 0
     const [counterStart, setCounterStart] = useState<number>(maxCount)
     const [counterMax, setCounterMax] = useState(maxCount)
-    const [text, setText] = useState<SetTextType>({
-        text:'Enter to set',
-        error:'error'
-    })
-
-
-
+    const [error, setError] = useState<string | null>(null)
     const handleClick = () => setCounterStart(+counterStart + 1)
 
     const dropping = () => {
-        debugger
         if (counterMax === counterStart) {
             setCounterStart(startCount)
         }
     }
     return (
         <div className={'App-block'}>
-            <Counter counterStart={counterStart} counterMax={counterMax} handleClick={handleClick} dropping={dropping}/>
-            <CounterSetting  setCounterStart={setCounterStart} setCounterMax={setCounterMax} counterStart={counterStart}
+            <Counter error={error} counterStart={counterStart} counterMax={counterMax} handleClick={handleClick} dropping={dropping}/>
+            <CounterSetting setError={setError} error={error}  setCounterStart={setCounterStart} setCounterMax={setCounterMax} counterStart={counterStart}
                             counterMax={counterMax}/>
         </div>
     )

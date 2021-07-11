@@ -16,8 +16,8 @@ export const InputSetting = (props:InputSetType) => {
     return (
         <div className={s.inputBlock}>
          <div className={s.inputLeadBlock}>
-             <div>MAX VALUE: <input className={s.input} type={'number'} onChange={props.onChagneValueInputMax}  max={props.maxValue} /></div>
-             <div>START VALUE: <input className={s.input} onChange={props.onChagneValueInputStart} type={'number'}   max={props.startValue} /></div>
+             <span>MAX VALUE:<input className={s.input} type={'number'} onChange={props.onChagneValueInputMax} min={-1} value={props.maxValue} /></span> <br/>
+             <span style={{marginRight: '10px'}} >START VALUE:<input className={s.input} onChange={props.onChagneValueInputStart} type={'number'}  min={-1} value={props.startValue} /></span>
          </div>
           <ButtonCounter btn={btnInc} dis={props.disReset}  nameBtn={'reset'}  click={props.reset} />
         </div>

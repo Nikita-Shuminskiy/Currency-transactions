@@ -1,46 +1,70 @@
 import React, { ChangeEvent, ChangeEventHandler, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import { Counter } from './DisplayCounter/Counter';
 import { CounterSetting } from './DisplayCounter/SettingCounter/CounterSetting';
+import { counterStartAC, setCounterMaxAC, setCounterStartAC, setInputMaxtAC, setInputStartAC } from './Redux/Counter_Reducer';
+import { AppRootStateType } from './Redux/Redux_store';
 
-export type AppType = {
-    text: string
-
-}
 
 const App = () => {
-    const [counterStart, setCounterStart] = useState(
-        Number(window.localStorage.getItem('StartValue'))
-    )
-    const [counterMax, setCounterMax] = useState(
-        Number(window.localStorage.getItem('MaxValue'))
-    )
-    const [error, setError] = useState<string | null>(null)
-    const [startValueInput, setStartValueInput] = useState(
-        Number(localStorage.getItem('StartValueLocal'))
-    )
+    const counterStart = useSelector<AppRootStateType, number>(state => state.counter.counterStart)
+    const counterMax = useSelector<AppRootStateType, number>(state => state.counter.counterMax)
 
-    const dropping = () => {
-        if (counterMax === counterMax) {
-            setCounterStart(startValueInput)
+    const startValueInput = useSelector<AppRootStateType, number>(state => state.counter.startValueInput)
+    const maxValueInput = useSelector<AppRootStateType, number>(state => state.counter.maxValueInput)
+
+    const dispatch = useDispatch()
+
+    const [counter, setCounter] = useState<boolean>(true)
+
+    const disReset = maxValueInput < 0 || startValueInput < 0 || startValueInput === maxValueInput
+
+    let disInc = counterMax === counterStart
+
+    const dropping = () => counterMax === counterMax && dispatch(setCounterStartAC(startValueInput))
+
+    const handleClick = () => dispatch(counterStartAC())
+
+    const reset = () => {
+        if (maxValueInput <= startValueInput)  return disReset
+         else {
+            dispatch(setCounterMaxAC(maxValueInput))
+            dispatch(setCounterStartAC(startValueInput))
+            setCounter(true)
         }
-        Number(localStorage.removeItem('MaxValue'))
     }
-    useEffect( () => {
-        window.localStorage.setItem('StartValue',JSON.stringify(counterStart))
-    }, [counterStart])
-    useEffect( () => {
-        window.localStorage.setItem( 'MaxValue',JSON.stringify(counterMax))
-    }, [counterMax])
 
-    const handleClick = () => setCounterStart(counterStart + 1)
-    let disInc = counterMax === counterStart ? true : false
+    const onChagneValueInputStart = (e: ChangeEvent<HTMLInputElement>) => {
+        const value = e.currentTarget.value
+        dispatch(setInputStartAC(+value))
+    }
+
+    const onChagneValueInputMax = (e: ChangeEvent<HTMLInputElement>) => {
+        const value = e.currentTarget.value
+        dispatch(setInputMaxtAC(+value))
+    }
+
+    const setingButton = () => {
+        setCounter(!true)
+    }
+
     return (
         <div className={'App-block'}>
-            <Counter disInc={disInc} error={error} counterStart={counterStart} counterMax={counterMax} handleClick={handleClick}
-                     dropping={dropping}/>
-            <CounterSetting disInc={disInc} setStartValueInput={setStartValueInput} startValueInput={startValueInput} setError={setError} setCounterStart={setCounterStart}
-                            setCounterMax={setCounterMax} />
+            {counter ? <Counter setingButton={setingButton}
+                                disInc={disInc}
+                                counterStart={counterStart}
+                                counterMax={counterMax}
+                                handleClick={handleClick}
+                                dropping={dropping}/> :
+                <CounterSetting
+                    startValueInput={startValueInput}
+                    disReset={disReset}
+                    reset={reset}
+                    maxValueInput={maxValueInput}
+                    onChagneValueInputStart={onChagneValueInputStart}
+                    onChagneValueInputMax={onChagneValueInputMax}/>}
+
         </div>
     )
 }

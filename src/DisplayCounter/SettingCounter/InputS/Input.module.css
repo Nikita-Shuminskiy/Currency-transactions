@@ -26,3 +26,14 @@
 	border: 1px solid #740606;
 	border-radius: 10px;
 }
+.errInput {
+	background: rgba(232, 54, 54, 0.59);
+	margin-left: 40px;
+	margin-top: 10%;
+	width: 50%;
+	height: 30px;
+	border-radius: 5px;
+}
+.startTextInput{
+	margin-right: 10px;
+}

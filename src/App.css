@@ -2,6 +2,14 @@
 	display: flex;
 	justify-content: space-around;
 }
+.btnSetting {
+	padding: 5px;
+	background: rgba(114, 8, 100, 0.72);
+	color: rgba(207, 220, 23, 0.89);
+	border-radius: 10px;
+	font-weight: bold;
+	font-family: Arial;
+}
 
 .Counter {
 	border: 2px solid rgba(210, 28, 192, 0.58);
@@ -14,6 +22,9 @@
 	display: flex;
 	align-items: center;
 	justify-content: center
+}
+.none{
+	display: none;
 }
 .counterDisplay {
 	font-weight: bold;
@@ -76,17 +87,18 @@ body {
 	border-radius: 10px;
 	color: white;
 }
-/*.error-message {
+.error-message {
 	color: red;
 	font-size: 40px ;
 	font-weight: bold;
-}*/
+}
 .counterStart{
 	color: yellow;
 	font-weight: bold;
 	font-size: 30px;
 }
-.btnDiv {
-
+.counter-text{
+	font-weight: bold;
+	color: yellow;
 }
 

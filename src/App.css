@@ -1,4 +1,4 @@
-.App-block {
+.app-block {
 	display: flex;
 	justify-content: space-around;
 }
@@ -10,6 +10,7 @@
 	font-weight: bold;
 	font-family: Arial;
 }
+
 
 .Counter {
 	border: 2px solid rgba(210, 28, 192, 0.58);
@@ -39,14 +40,15 @@ body {
 	display: flex;
 	flex-direction: column;
 	position: absolute;
-	width: 80%;
-	top:19%;
+	width: 400px;
+	height: 300px;
+	top:10%;
+	right: 37%;
 	border-radius:30px;
 	background:blueviolet;
 	height: 50%;
 }
 .btnInc {
-
 	padding: 10px;
 	position: relative;
 	right: 50px;

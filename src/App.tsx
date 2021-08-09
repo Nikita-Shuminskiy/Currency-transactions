@@ -1,24 +1,23 @@
-import React, { ChangeEvent, ChangeEventHandler, useEffect, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import { Counter } from './DisplayCounter/Counter';
-import { CounterSetting } from './DisplayCounter/SettingCounter/CounterSetting';
-import { counterStartAC, setCounterMaxAC, setCounterStartAC, setInputMaxtAC, setInputStartAC } from './Redux/Counter_Reducer';
-import { AppRootStateType } from './Redux/Redux_store';
+import { InputSetting } from './DisplayCounter/InputS/InputSetting';
+import { AppRootStateType } from './Redux/ReduxStore';
+import { counterStartAC, setCounterMaxAC, setCounterStartAC, setInputMaxtAC, setInputStartAC } from './Redux/CounterReducer'
 
 
-const App = () => {
-    const counterStart = useSelector<AppRootStateType, number>(state => state.counter.counterStart)
-    const counterMax = useSelector<AppRootStateType, number>(state => state.counter.counterMax)
 
-    const startValueInput = useSelector<AppRootStateType, number>(state => state.counter.startValueInput)
-    const maxValueInput = useSelector<AppRootStateType, number>(state => state.counter.maxValueInput)
+
+const App = React.memo(() => {
+    const { counterStart, counterMax, startValueInput, maxValueInput } = useSelector<AppRootStateType,
+        { counterStart:number; counterMax: number, startValueInput: number,maxValueInput:number  }>(state => state.counter)
 
     const dispatch = useDispatch()
 
     const [counter, setCounter] = useState<boolean>(true)
 
-    const disReset = maxValueInput < 0 || startValueInput < 0 || startValueInput === maxValueInput
+    const disReset = maxValueInput < 0 || startValueInput < 0 || startValueInput === maxValueInput || maxValueInput < maxValueInput || maxValueInput < startValueInput
 
     let disInc = counterMax === counterStart
 
@@ -26,47 +25,42 @@ const App = () => {
 
     const handleClick = () => dispatch(counterStartAC())
 
-    const reset = () => {
-        if (maxValueInput <= startValueInput)  return disReset
-         else {
+    const setBtnCounter = () => {
             dispatch(setCounterMaxAC(maxValueInput))
             dispatch(setCounterStartAC(startValueInput))
             setCounter(true)
-        }
     }
 
-    const onChagneValueInputStart = (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.currentTarget.value
+    const onChangeValueInputStart = (e: ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.currentTarget;
         dispatch(setInputStartAC(+value))
     }
 
-    const onChagneValueInputMax = (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.currentTarget.value
+    const onChangeValueInputMax = (e: ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.currentTarget;
         dispatch(setInputMaxtAC(+value))
     }
 
-    const setingButton = () => {
+    const settingButton = () => {
         setCounter(!true)
     }
 
     return (
-        <div className={'App-block'}>
-            {counter ? <Counter setingButton={setingButton}
+        <div className="app-block">
+            {counter ? <Counter settingButton={settingButton}
                                 disInc={disInc}
-                                counterStart={counterStart}
-                                counterMax={counterMax}
                                 handleClick={handleClick}
                                 dropping={dropping}/> :
-                <CounterSetting
+                <InputSetting
                     startValueInput={startValueInput}
                     disReset={disReset}
-                    reset={reset}
+                    setBtnCounter={setBtnCounter}
                     maxValueInput={maxValueInput}
-                    onChagneValueInputStart={onChagneValueInputStart}
-                    onChagneValueInputMax={onChagneValueInputMax}/>}
+                    onChangeValueInputStart={onChangeValueInputStart}
+                    onChangeValueInputMax={onChangeValueInputMax}/>}
 
         </div>
     )
-}
+})
 
 export default App

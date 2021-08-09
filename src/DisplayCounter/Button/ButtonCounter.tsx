@@ -6,12 +6,12 @@ type ButtonType ={
     click?: () => void
   
 }
-export const ButtonCounter = (props:ButtonType) => {
+export const ButtonCounter = React.memo((props:ButtonType) => {
     return (
         <div className={'btnDiv'}>
             <button className={props.btnClass} disabled={props.dis }
                     onClick={props.click}>{props.nameBtn}</button>
         </div>
     )
-}
+})
 

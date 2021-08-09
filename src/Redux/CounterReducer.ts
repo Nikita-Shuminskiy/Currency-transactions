@@ -1,5 +1,3 @@
-import { Dispatch } from "redux"
-import { AppRootStateType } from "./Redux_store"
 
 
 export type ActionType = setCounterStartType | counterStartType |
@@ -24,7 +22,7 @@ export type setCounterMaxType = ReturnType<typeof setCounterMaxAC >
 export const inputStartAC = () => ({type: 'INPUT-START'} as const)
 export const setInputStartAC = (start:number) => ({type: 'SET-INPUT-START',start} as const)
 
-export const setInputMaxtAC = (start:number) => ({type: 'SET-INPUT-MAX',start} as const)
+export const setInputMaxtAC = (max:number) => ({type:'SET-INPUT-MAX' , max} as const)
 export const inputMaxAC = () => ({type: 'INPUT-MAX'} as const)
 
 
@@ -33,8 +31,8 @@ export const counterStartAC = () => ({type: 'COUNTER-START',} as const)
 export const setCounterStartAC = (start:number) => ({type: 'SET-COUNTER-START',start} as const)
 
 
-export const setCounterMaxAC = (start:number) => ({type: 'SET-COUNTER-MAX',start} as const)
-export const counterMaxAC = () => ({type: 'COUNTER-MAX',} as const)
+export const setCounterMaxAC = (max:number) => ({type: 'SET-COUNTER-MAX', max} as const)
+export const counterMaxAC = () => ({type: 'COUNTER-MAX'} as const)
 
 export type InitianStateType = typeof initialState
 
@@ -68,7 +66,7 @@ export function CounterReducer (state = initialState , action:ActionType):Initia
        case 'SET-COUNTER-MAX': {
            return {
                ...state,
-               counterMax: action.start
+               counterMax: action.max
            }
        }
 
@@ -93,7 +91,7 @@ export function CounterReducer (state = initialState , action:ActionType):Initia
        case 'SET-INPUT-MAX': {
            return {
                ...state,
-               maxValueInput: action.start
+               maxValueInput: action.max
            }
        }
        default:

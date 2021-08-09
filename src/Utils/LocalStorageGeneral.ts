@@ -1,4 +1,4 @@
-import { AppRootStateType } from "../Redux/Redux_store";
+import { AppRootStateType } from "../Redux/ReduxStore";
 
 export const loadState = () => {
     try {

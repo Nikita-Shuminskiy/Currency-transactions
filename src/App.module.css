@@ -1,0 +1,10 @@
+.appBlock {
+	display: flex;
+	justify-content: space-around;
+	height: 600px;
+	align-items: center;
+}
+body {
+	background: cadetblue;
+}
+

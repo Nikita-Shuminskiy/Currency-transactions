@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React  from 'react';
+import s from './Button.module.css'
 type ButtonType ={
     nameBtn:string
-    dis?:boolean
+    disabled?:boolean
     btnClass:string
     click?: () => void
   
 }
 export const ButtonCounter = React.memo((props:ButtonType) => {
     return (
-        <div className={'btnDiv'}>
-            <button className={props.btnClass} disabled={props.dis }
+        <div>
+            <button className={props.btnClass} disabled={props.disabled }
                     onClick={props.click}>{props.nameBtn}</button>
         </div>
     )

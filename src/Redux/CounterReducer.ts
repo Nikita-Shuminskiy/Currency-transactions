@@ -96,7 +96,5 @@ export function CounterReducer (state = initialState , action:ActionType):Initia
        }
        default:
         return state
-
-
    }
 }

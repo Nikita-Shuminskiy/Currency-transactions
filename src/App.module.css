@@ -5,6 +5,7 @@
 	align-items: center;
 }
 body {
-	background: cadetblue;
+	background: url('Img/Body.jpg');
+	background-size: cover;
 }
 

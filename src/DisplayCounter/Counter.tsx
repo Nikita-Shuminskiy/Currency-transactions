@@ -15,7 +15,7 @@ type CounterType = {
 export const Counter = React.memo((props: CounterType) => {
     const {counterStart, counterMax} = useSelector<AppRootStateType,
         { counterStart: number; counterMax: number }>(state => state.counter)
-
+/*tst*/
     const count = counterMax === counterStart ? s.counterDisplayErr : s.counterDisplay
 
     const btnInc = counterMax === counterStart ? s.btnIncErr : s.btnInc
